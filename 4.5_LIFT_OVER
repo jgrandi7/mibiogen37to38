@@ -1,0 +1,7 @@
+#NOTE: THIS SCRIPT MUST BE RUN IN TERMINAL (prior steps are python scripts)
+
+# converts csv columns into bed file
+tail -n+2 /home/jacob/mibiogen37to38/mibiogensnps37wfreq.csv | awk '{print "chr"$3, $4, $4+1}' OFS=',' > /home/jacob/mibiogen37to38/lO_mibiogen_GRCh37wfreq.bed
+
+#liftOver step produces failures and successes files converting from build 37 into build 38
+liftOver /home/jacob/mibiogen37to38/lO_mibiogen_GRCh37wfreq.bed /home/wheelerlab3/Data/liftOver_chainfiles/hg19ToHg38.over.chain.gz /home/jacob/mibiogen37to38/lO_mibiogen_hg19_to_hg38_freq_successes /home/jacob/mibiogen37to38/lO_mibiogen_hg19_to_hg38_freq_failures
